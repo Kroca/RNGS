@@ -28,6 +28,7 @@ public class DocumentDAOImpl implements DocumentDAO {
             session.persist(d);
         }catch (HibernateException ex){
             logger.error(ex.getMessage());
+            return;
         }
         logger.info("Новый документ успешно добавлен");
     }
@@ -42,6 +43,7 @@ public class DocumentDAOImpl implements DocumentDAO {
             document = (Document) session.get(Document.class,id);
         }catch (HibernateException ex){
             logger.error(ex.getMessage());
+            return null;
         }
         logger.info("Документ успешно загружен");
         return document;
