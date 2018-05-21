@@ -36,6 +36,7 @@ public class ServerController {
             JSONObject context = new JSONObject(json).getJSONObject("context");
             docId = Integer.parseInt(context.getString("documentId"));
         }catch (Exception e){
+            logger.warn("Не удалось обработать запрос: "+ e.getMessage());
             return new ResponseEntity<>(new JSONObject().put("error","Couldn't handle the input").toString(),HttpStatus.BAD_REQUEST);
         }
         logger.info("Получен запрос на генерацию числа для докумнта" + docId);
@@ -69,6 +70,7 @@ public class ServerController {
             docId = Integer.parseInt(context.getString("documentId"));
             generatedNumber = Integer.parseInt(context.getString("uniqNum"));
         }catch (Exception e){
+            logger.warn("Не удалось обработать запрос: "+ e.getMessage());
             return new ResponseEntity<>(new JSONObject().put("error","Couldn't handle the input").toString(),HttpStatus.BAD_REQUEST);
         }
         logger.info("Получен запрос на проверку числа " +generatedNumber+" для докумнта " + docId);
